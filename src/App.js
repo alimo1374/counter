@@ -1,28 +1,48 @@
-import React, { Component } from 'react';
-import logo from './logo.svg';
+import React from 'react';
 import './App.css';
 
-class App extends Component {
-  render() {
-    return (
-      <div className="App">
-        <header className="App-header">
-          <img src={logo} className="App-logo" alt="logo" />
-          <p>
-            Edit <code>src/App.js</code> and save to reload.
-          </p>
-          <a
-            className="App-link"
-            href="https://reactjs.org"
-            target="_blank"
-            rel="noopener noreferrer"
-          >
-            Learn React
-          </a>
-        </header>
-      </div>
-    );
-  }
-}
+export default class Counter extends React.Component{
+    constructor(props){
+        super(props);
+        this.increment=this.increment.bind(this);
+        this.decrement= this.decrement.bind(this);
+        this.reset= this.reset.bind(this);
+        this.state={
+            counter : 0 
+        }
+    }
+    increment(){
+        this.setState((prev)=>{
+            return{
+                counter: prev.counter +1
+            }
+        })
+    }
+    
+    decrement(){
+        this.setState((prev)=>{
+            return{
+                counter: prev.counter - 1
+            }
+        })
+    }
+    reset(){
+        this.setState(()=>{
+            return{
+                counter: 0
+            }
+        })
+    }
+    
+    render(){
+        return(
+            <div className="App">
+            <h1>Counter : {this.state.counter}</h1>
+                <button onClick={this.increment}>+1</button>
+                <button onClick={this.decrement}>-1</button>
+                <button onClick={this.reset}>reset</button>
 
-export default App;
+            </div>
+        );
+    }
+}
